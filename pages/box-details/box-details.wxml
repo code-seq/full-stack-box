@@ -1,0 +1,15 @@
+<!--pages/test/test.wxml-->
+<view>
+  <cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">{{title}}</view>
+  </cu-custom>
+  <!-- loading...加载 -->
+  <i-spin fix wx:if="{{spinShow}}"></i-spin>
+  <view wx:if="{{posts.length == 0}}" class="flex padding justify-center">
+    <view class="bg-white padding-sm margin-xs radius">暂无内容！</view>
+  </view>
+  <view wx:for="{{posts}}" wx:key="index" animation="{{anp}}">
+    <post-card post="{{item}}" bind:postCardTap="onPostCardTap"></post-card>
+  </view>
+</view>

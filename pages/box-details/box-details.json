@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "post-card":"../../components/post-card/index",
+    "i-spin": "../../iviewui/spin/index"
+  }
+}

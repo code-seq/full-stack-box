@@ -1,0 +1,17 @@
+<!--components/post-card/index.wxml-->
+<view class="cu-card article {{1==2?'no-card':''}}" bind:tap="onTap" data-pid="{{post._id}}">
+  <view class="cu-item shadow bg-black">
+    <view class="title">
+      <view class="text-cut">{{post.postTitle}}</view>
+    </view>
+    <view class="content">
+      <image class="img" src="{{post.postThumbnail}}" mode="scaleToFill" lazy-load="true"></image>
+      <view class="desc">
+        <view class="text-content">{{post.postSummary}}</view>
+        <view>
+          <view wx:for="{{post.tags}}" wx:key="index" class="cu-tag bg-green light sm round">{{item}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

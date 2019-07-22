@@ -1,0 +1,57 @@
+<!--index.wxml-->
+<bottom-modal-cmp modalName="{{modalName}}"></bottom-modal-cmp>
+
+<view class="container">
+
+  <!-- loading...加载 -->
+  <i-spin fix wx:if="{{spinShow}}"></i-spin>
+
+  <!-- 首页图片 -->
+  <view class="top">
+    <view class="aquanblog">
+      {{blogName}}
+      <view class="aquanblogs">{{jinrishici}}</view>
+    </view>
+    <view bindtap="showMask" class='qrcode'></view>
+  </view>
+
+  <view class="nav" hidden="{{nav}}">
+    <view class="nav-text">代码改变世界</view>
+    <view bindtap="showMask" class='qrcode nav-qrcode'></view>
+  </view>
+
+  <!-- Posts -->
+  <view class="post-card" wx:for="{{posts}}" wx:key="_id" animation="{{anp}}">
+    <!-- Navigator页面跳转 -->
+    <navigator url="../post/post?postId={{item._id}}">
+      <view class="post-card-image-link">
+        <image class="img" lazy-load="true" mode="widthFix" src="{{item.postThumbnail}}"></image>
+      </view>
+      <view class="post-card-content">
+        <view style="margin-left: 10px; color: #cccccc;">
+          <i-tag wx:for="{{item.tags}}" wx:key="tagId" type="border" style="margin-right: 5px;">
+            {{item}}
+          </i-tag>
+        </view>
+        <view class="text-xl padding">
+          <text class="text-black text-bold">{{item.postTitle}}</text>
+        </view>
+        <view class="text-df padding">{{item.postSummary}}</view>
+        <view class="footer">
+          <view class="text-gray text-sm flex justify-between">
+            <text>{{item.postDate}}</text>
+            <view class="text-gray text-sm">
+              <text class="cuIcon-attentionfill margin-lr-xs">{{item.postViews}}</text>
+              <text class="cuIcon-appreciatefill margin-lr-xs">20</text>
+              <text class="cuIcon-messagefill margin-lr-xs">{{item.comments.length}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </navigator>
+  </view>
+  <i-message id="message" />
+</view>
+
+
+<i-load-more tip="box bottom" loading="{{loadMore}}" hidden="{{loadMores}}" />

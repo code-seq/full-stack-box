@@ -1,0 +1,110 @@
+<!--pages/post/post.wxml-->
+<scroll-view scroll-y class="DrawerPage {{modalName=='viewModal'?'show':''}}">
+  <!-- 蒙版效果 -->
+  <view class="mask" hidden="{{aflag}}" catchtap="closeMask">
+    <view class="masks" catchtap="prevent" animation="{{ani}}">
+      <view class="box">
+        <image class="leftImage" mode="widthFix" src="http://a46083df247f06208e47.test.upcdn.net/apicloud/13dc95a48a3cfbe534fa541e08aaff1e.jpg"></image>
+        <view class="right">
+          <view class="solid-bottom text-xl padding">
+            <text class="text-black text-bold">vic</text>
+          </view>
+          <view class="info">
+            <view class="field">Email</view>
+            <view class="value">vic.l.zhang@outlook.com</view>
+            <view class="field">WeChat</view>
+            <view class="value">扫描左侧二维码</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- loading...加载 -->
+  <i-spin fix wx:if="{{spinShow}}"></i-spin>
+
+  <view class="nav">
+    <view class="nav-text">{{postTitle}}</view>
+    <view bindtap="returnPage" class='return nav-return'></view>
+  </view>
+
+  <!-- 悬浮评论按钮 -->
+  <view class="openComment">
+    <i-icon type="message" size="28" color="#fff" bindtap="showModal" data-target="viewModal" />
+  </view>
+
+
+  <view slot="title" class="top">
+    <view style="padding: 10px; padding-top:88px;">
+      <view class="stickyTitle">{{post.postTitle}}</view>
+      <view class="titleTags">
+        <i-tag wx:for="{{post.tags}}" wx:key="index" type="border" style="margin-right: 5px;">
+          {{item}}
+        </i-tag>
+        <view class="titleData">
+          <i-icon type="time" size="12" color="#cccccc" />{{post.postDate}}
+          <i-icon type="browse" size="12" color="#cccccc" />{{viewCount}}
+          <i-icon type="like_fill" size="12" color="#cccccc" />{{likeCount}}
+          <view bindtap='showMask'>
+            <i-icon type="businesscard_fill" size="16" color="#000000" />click me
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="content">
+    <view slot="content" style="margin-top:10px;">
+      <wemark md="{{post.postContentMd}}" link highlight="true" type="wemark"></wemark>
+    </view>
+    <view class="i-divider-mart">
+      <i-divider>box bottom</i-divider>
+    </view>
+  </view>
+</scroll-view>
+
+<view class="DrawerClose {{modalName=='viewModal'?'show':''}}" bindtap="hideModal">
+  <text class="cuIcon-pullright"></text>
+</view>
+
+<scroll-view scroll-y class="DrawerWindow {{modalName=='viewModal'?'show':''}}">
+  <view wx:if="{{comments.length == 0}}" class="flex padding justify-center">
+    <view class="bg-white padding-sm margin-xs radius">暂无评论！</view>
+  </view>
+  <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
+    <view class="cu-item" wx:for="{{comments}}" wx:key="index">
+      <i-icon type="mine_fill" size="32" color="gray" />
+      <view class="content">
+        <view class="text-grey">{{item.commentAuthor}}</view>
+        <view class="text-gray text-content text-df">
+          {{item.commentContent}}
+        </view>
+        <view class="margin-top-sm flex justify-between">
+          <view class="text-gray text-df">{{item.commentDate}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="comment" wx:if="{{commentsFlag}}">
+      <button wx:if="{{!hasUserInfo && canIUse}}" class='userinfoBtn' open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+        <view>授权后可评论</view>
+      </button>
+      <block wx:else>
+        <!-- bindconfirm键盘触发事件 -->
+        <view class='commentInput'>
+          <input bindinput="bindKeyInput" value='{{inputValue}}' class='input' type="text" placeholder="发表您的评论....." confirm-type="send" bindconfirm='sendComment' cursor-spacing="10"></input>
+        </view>
+        <view class='likeButton' catchtap='likeButton'>
+          <block wx:if="{{!likeButton}}">
+            <i-icon type="integral" size="32" color="#929292" />
+          </block>
+          <block wx:else>
+            <i-icon type="integral_fill" size="32" color="#55915b" />
+          </block>
+        </view>
+        <view class='commentBtn' bindtap='sendComment'>发送</view>
+      </block>
+    </view>
+  </view>
+  <i-toast id="toast" />
+  <i-message id="message" />
+</scroll-view>

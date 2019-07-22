@@ -1,0 +1,14 @@
+{
+    "usingComponents": {
+        "i-spin": "../../iviewui/spin/index",
+        "i-tag": "../../iviewui/tag/index",
+        "i-icon": "../../iviewui/icon/index",
+        "i-divider": "../../iviewui/divider/index",
+        "i-message": "../../iviewui/message/index",
+        "i-toast": "../../iviewui/toast/index",
+
+        "wemark": "../../wemark/wemark"
+    },
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black"
+}

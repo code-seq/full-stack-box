@@ -1,0 +1,20 @@
+<view bindtap="hideModal" class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar">
+      <view class="action text-green"></view>
+      <view class="action text-green">盒子</view>    
+      <view class="action text-green" bindtap="hideModal">
+        <text class="cuIcon-forward lg text-green"></text>
+      </view>
+    </view>
+    <view class="padding-0">
+      <view class='nav-list'>
+        <navigator open-type="navigate" hover-class='none' url="/pages/box-details/box-details?title={{item.title}}&category={{item.name}}" class="nav-li bg-{{item.color}}" wx:for="{{elements}}" wx:key>
+          <view class="nav-title">{{item.title}}</view>
+          <view class="nav-name">{{item.name}}</view>
+          <text class='cuIcon-{{item.icon}}'></text>
+        </navigator>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,15 @@
+{
+    "usingComponents": {
+        "i-card": "../../iviewui/card/index",
+        "i-avatar": "../../iviewui/avatar/index",
+        "i-spin": "../../iviewui/spin/index",
+        "i-tag": "../../iviewui/tag/index",
+        "i-divider": "../../iviewui/divider/index",
+        "i-load-more": "../../iviewui/load-more/index",
+        "i-message": "../../iviewui/message/index",
+
+        "bottom-modal-cmp":"../../components/bottom-modal/index"
+    },
+    "enablePullDownRefresh": true,
+    "backgroundTextStyle": "dark"
+}
